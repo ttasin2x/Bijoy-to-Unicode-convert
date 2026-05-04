@@ -1,5 +1,9 @@
-const cacheName = 'unijoy-v1';
-const assets = ['./', './index.html', './photos/logo.webp'];
+const cacheName = 'unijoy-v2';
+const assets = [
+  './',
+  './index.html',
+  './photos/logo.webp'
+];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(cacheName).then(cache => cache.addAll(assets)));
