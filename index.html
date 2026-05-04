@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniJoy - Unicode to Bijoy</title>
+    <title>Unicode to Bijoy & Developer Profile</title>
     
     <meta name="theme-color" content="#6358DE">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,6 +32,7 @@
             --card-blue-bg: #F0F4FF; --card-blue-border: #A3BFFF; --card-blue-icon: #5865F2;
             --card-purple-bg: #FAF5FF; --card-purple-border: #E9D5FF; --card-purple-icon: #C084FC;
             --card-green-bg: #F0FDF4;  --card-green-border: #BBF7D0;  --card-green-icon: #22C55E;
+            --card-orange-bg: #FFF5F0; --card-orange-border: #FFD1D1; --card-orange-icon: #FF6B6B;
         }
 
         /* Dark Theme Variables */
@@ -49,6 +50,7 @@
             --card-blue-bg: #1A1D2D; --card-blue-border: #2A365D; 
             --card-purple-bg: #251D2D; --card-purple-border: #4A355D; 
             --card-green-bg: #142E1F;  --card-green-border: #1C402B; 
+            --card-orange-bg: #331A1A; --card-orange-border: #4A2525; 
         }
 
         * {
@@ -80,7 +82,6 @@
 
         .lang-btn { display: flex; align-items: center; gap: 6px; background: var(--white); border: 1px solid var(--border-light); color: var(--text-dark); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: var(--card-shadow); transition: all 0.2s; }
         .lang-btn:hover { border-color: var(--primary); color: var(--primary); }
-        
         .lang-dropdown-menu { display: none; position: absolute; top: 45px; right: 0; background: var(--white); border: 1px solid var(--border-light); border-radius: 12px; box-shadow: var(--card-shadow); flex-direction: column; overflow: hidden; z-index: 60; min-width: 100px; }
         .lang-dropdown-menu.show { display: flex; }
         .lang-dropdown-menu span { padding: 10px 20px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--text-dark); text-align: center; }
@@ -170,6 +171,8 @@
         .card-purple .icon-box { background: var(--card-purple-icon); }
         .card-green { background: var(--card-green-bg); border: 1px solid var(--card-green-border); }
         .card-green .icon-box { background: var(--card-green-icon); }
+        .card-orange { background: var(--card-orange-bg); border: 1px solid var(--card-orange-border); display: none; } /* Hidden by default until PWA allows */
+        .card-orange .icon-box { background: var(--card-orange-icon); }
 
         /* --- MODAL / POPUP STYLES --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); z-index: 200; justify-content: center; align-items: center; padding: 20px; animation: modalFadeIn 0.2s ease; backdrop-filter: blur(3px); }
@@ -272,6 +275,7 @@
         <div class="sidebar-nav">
             <a href="#" onclick="switchView('convert'); toggleSidebar()"><i class="fas fa-exchange-alt"></i> <span id="side-nav-conv">স্মার্ট কনভার্টার</span></a>
             <a href="#" onclick="switchView('dev'); toggleSidebar()"><i class="fas fa-code"></i> <span id="side-nav-dev">ডেভেলপার</span></a>
+            <a href="#" id="side-install-app" style="display:none;" onclick="triggerInstall()"><i class="fas fa-download"></i> <span id="side-nav-inst">অ্যাপ ইনস্টল করুন</span></a>
         </div>
     </aside>
 
@@ -349,7 +353,7 @@
                     <div class="avatar-inner">T</div>
                     <div class="badge"><i class="fas fa-trophy"></i></div>
                 </div>
-                <h1>Tasin</h1>
+                <h1>Tanvir Tasin</h1>
                 <p id="t-dev-role">Professional graphic designer, front-end & Android developer based in Barguna, Barishal. Crafting butter smooth UIs.</p>
             </div>
 
@@ -361,6 +365,12 @@
 
             <div class="section-divider"><span id="t-resources">RESOURCES & FEATURES</span></div>
             
+            <div class="styled-card card-orange add-ripple" id="installAppCard" onclick="triggerInstall()">
+                <div class="icon-box"><i class="fas fa-download"></i></div>
+                <div class="texts"><h3 id="t-i-title">অ্যাপ ইনস্টল করুন</h3><p id="t-i-desc">হোমস্ক্রিনে অ্যাড করুন</p></div>
+                <div class="arrow"><i class="fas fa-arrow-down"></i></div>
+            </div>
+
             <div class="styled-card card-yellow add-ripple" onclick="openModal('coffeeModal')">
                 <div class="icon-box"><i class="fas fa-coffee"></i></div>
                 <div class="texts"><h3 id="t-c-title">Buy me a coffee</h3><p id="t-c-desc">Support development</p></div>
@@ -386,7 +396,7 @@
             </div>
 
             <div style="text-align:center; font-size: 11px; color: var(--text-gray); margin: 30px 0;">
-                Made with <i class="fas fa-heart" style="color:#C084FC"></i> for Geeks
+                Made with <i class="fas fa-heart" style="color:#C084FC"></i> for People
             </div>
         </section>
 
@@ -489,7 +499,33 @@
     </div>
 
     <script>
-        // --- 1. PWA Service Worker Registration ---
+        // --- 1. PWA INSTALL LOGIC ---
+        let deferredPrompt;
+        const installCard = document.getElementById('installAppCard');
+        const sideInstall = document.getElementById('side-install-app');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installCard.style.display = 'flex';
+            sideInstall.style.display = 'flex';
+        });
+
+        function triggerInstall() {
+            if (!deferredPrompt) return;
+            installCard.style.display = 'none';
+            sideInstall.style.display = 'none';
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                } else {
+                    console.log('User dismissed the install prompt');
+                }
+                deferredPrompt = null;
+            });
+        }
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js').then(reg => {
@@ -503,56 +539,28 @@
         // --- 2. LANGUAGE TRANSLATION LOGIC ---
         const dictionary = {
             'EN': {
-                title: "Unicode to <span>Bijoy</span> Converter",
-                desc: "Convert your Unicode text to Bijoy format easily and quickly. Completely free and secure.",
-                src: "<i class='fas fa-pen' style='color:var(--primary)'></i> Source Text (Input)",
-                auto: "Auto", 
-                clear: "<i class='fas fa-trash-alt'></i> Clear",
+                title: "Unicode to <span>Bijoy</span> Converter", desc: "Convert your Unicode text to Bijoy format easily and quickly. Completely free and secure.",
+                src: "<i class='fas fa-pen' style='color:var(--primary)'></i> Source Text (Input)", auto: "Auto", clear: "<i class='fas fa-trash-alt'></i> Clear",
                 out: "<i class='fas fa-file-alt' style='color:var(--primary)'></i> Converted Text (Output)",
-                btnBjy: "<i class='fas fa-arrow-down'></i> To Bijoy", 
-                btnUni: "<i class='fas fa-arrow-up'></i> To Unicode", 
-                btnCpy: "<i class='far fa-copy'></i> Copy Output",
-                vis: "Visual Mode",
-                role: "Professional graphic designer, front-end & Android developer based in Barguna, Barishal. Crafting butter smooth UIs.",
-                conn: "CONNECT", 
-                res: "RESOURCES & FEATURES",
-                cTitle: "Buy me a coffee", 
-                cDesc: "Support development", 
-                hTitle: "How it works", 
-                hDesc: "See simple guidelines",
-                fTitle: "App Features", 
-                fDesc: "See what you get", 
-                qTitle: "FAQs", 
-                qDesc: "Offline support & more",
-                navConv: "Convert", 
-                navDev: "Developer",
-                toastCopy: "Successfully Copied!"
+                btnBjy: "<i class='fas fa-arrow-down'></i> To Bijoy", btnUni: "<i class='fas fa-arrow-up'></i> To Unicode", btnCpy: "<i class='far fa-copy'></i> Copy Output",
+                vis: "Visual Mode", role: "Professional graphic designer, front-end & Android developer based in Barguna, Barishal. Crafting butter smooth UIs.",
+                conn: "CONNECT", res: "RESOURCES & FEATURES",
+                cTitle: "Buy me a coffee", cDesc: "Support development", hTitle: "How it works", hDesc: "See simple guidelines",
+                fTitle: "App Features", fDesc: "See what you get", qTitle: "FAQs", qDesc: "Offline support & more",
+                navConv: "Convert", navDev: "Developer", toastCopy: "Successfully Copied!",
+                iTitle: "Install App", iDesc: "Add to Homescreen", navInst: "Install App"
             },
             'BN': {
-                title: "Unicode থেকে <span>Bijoy</span> কনভার্টার",
-                desc: "আমাদের টুল ব্যবহার করে খুব সহজে ও দ্রুত Unicode (ইউনিকোড) টেক্সটকে Bijoy (বিজয়) ফরম্যাটে রূপান্তর করুন। একদম ফ্রি এবং নিরাপদ।",
-                src: "<i class='fas fa-pen' style='color:var(--primary)'></i> সোর্স টেক্সট (Input)",
-                auto: "অটো", 
-                clear: "<i class='fas fa-trash-alt'></i> মুছুন",
+                title: "Unicode থেকে <span>Bijoy</span> কনভার্টার", desc: "আমাদের টুল ব্যবহার করে খুব সহজে ও দ্রুত Unicode (ইউনিকোড) টেক্সটকে Bijoy (বিজয়) ফরম্যাটে রূপান্তর করুন। একদম ফ্রি এবং নিরাপদ।",
+                src: "<i class='fas fa-pen' style='color:var(--primary)'></i> সোর্স টেক্সট (Input)", auto: "অটো", clear: "<i class='fas fa-trash-alt'></i> মুছুন",
                 out: "<i class='fas fa-file-alt' style='color:var(--primary)'></i> রূপান্তরিত টেক্সট (Output)",
-                btnBjy: "<i class='fas fa-arrow-down'></i> To Bijoy", 
-                btnUni: "<i class='fas fa-arrow-up'></i> To Unicode", 
-                btnCpy: "<i class='far fa-copy'></i> Copy Output",
-                vis: "Visual Mode",
-                role: "Professional graphic designer, front-end & Android developer based in Barguna, Barishal. Crafting butter smooth UIs.",
-                conn: "CONNECT", 
-                res: "RESOURCES & FEATURES",
-                cTitle: "Buy me a coffee", 
-                cDesc: "Support development", 
-                hTitle: "অ্যাপ কীভাবে কাজ করে", 
-                hDesc: "সহজ গাইডলাইন দেখুন",
-                fTitle: "অ্যাপের বৈশিষ্ট্যসমূহ", 
-                fDesc: "কী কী সুবিধা পাচ্ছেন দেখুন", 
-                qTitle: "FAQs", 
-                qDesc: "অফলাইন সাপোর্ট ও অন্যান্য",
-                navConv: "কনভার্ট", 
-                navDev: "ডেভেলপার",
-                toastCopy: "সফলভাবে কপি হয়েছে!"
+                btnBjy: "<i class='fas fa-arrow-down'></i> To Bijoy", btnUni: "<i class='fas fa-arrow-up'></i> To Unicode", btnCpy: "<i class='far fa-copy'></i> Copy Output",
+                vis: "Visual Mode", role: "Professional graphic designer, front-end & Android developer based in Barguna, Barishal. Crafting butter smooth UIs.",
+                conn: "CONNECT", res: "RESOURCES & FEATURES",
+                cTitle: "Buy me a coffee", cDesc: "Support development", hTitle: "অ্যাপ কীভাবে কাজ করে", hDesc: "সহজ গাইডলাইন দেখুন",
+                fTitle: "অ্যাপের বৈশিষ্ট্যসমূহ", fDesc: "কী কী সুবিধা পাচ্ছেন দেখুন", qTitle: "FAQs", qDesc: "অফলাইন সাপোর্ট ও অন্যান্য",
+                navConv: "কনভার্ট", navDev: "ডেভেলপার", toastCopy: "সফলভাবে কপি হয়েছে!",
+                iTitle: "অ্যাপ ইনস্টল করুন", iDesc: "হোমস্ক্রিনে অ্যাড করুন", navInst: "অ্যাপ ইনস্টল করুন"
             }
         };
 
@@ -592,8 +600,10 @@
             document.getElementById('b-nav-dev').innerText = t.navDev;
             document.getElementById('side-nav-conv').innerText = t.navConv;
             document.getElementById('side-nav-dev').innerText = t.navDev;
+            document.getElementById('t-i-title').innerText = t.iTitle; 
+            document.getElementById('t-i-desc').innerText = t.iDesc;
+            document.getElementById('side-nav-inst').innerText = t.navInst;
 
-            // Recalculate liquid drop size because text length changed
             setTimeout(() => {
                 const activeBtn = document.querySelector('.nav-btn.active');
                 if(activeBtn) updateLiquidDrop(activeBtn.id);
