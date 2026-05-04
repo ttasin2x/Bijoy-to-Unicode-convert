@@ -266,31 +266,31 @@
         <span id="toastMsg">সফলভাবে কপি হয়েছে!</span>
     </div>
 
-    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+    <div class="overlay" id="overlay" onclick="b4()"></div>
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <img src="photos/logo.webp" alt="Logo" class="app-logo">
-            <button class="action-btn" onclick="toggleSidebar()"><i class="fas fa-times"></i></button>
+            <button class="action-btn" onclick="b4()"><i class="fas fa-times"></i></button>
         </div>
         <div class="sidebar-nav">
-            <a href="#" onclick="switchView('convert'); toggleSidebar()"><i class="fas fa-exchange-alt"></i> <span id="side-nav-conv">স্মার্ট কনভার্টার</span></a>
-            <a href="#" onclick="switchView('dev'); toggleSidebar()"><i class="fas fa-code"></i> <span id="side-nav-dev">ডেভেলপার</span></a>
-            <a href="#" id="side-install-app" style="display:none;" onclick="triggerInstall()"><i class="fas fa-download"></i> <span id="side-nav-inst">অ্যাপ ইনস্টল করুন</span></a>
+            <a href="#" onclick="a7('convert'); b4()"><i class="fas fa-exchange-alt"></i> <span id="side-nav-conv">স্মার্ট কনভার্টার</span></a>
+            <a href="#" onclick="a7('dev'); b4()"><i class="fas fa-code"></i> <span id="side-nav-dev">ডেভেলপার</span></a>
+            <a href="#" id="side-install-app" style="display:none;" onclick="a2()"><i class="fas fa-download"></i> <span id="side-nav-inst">অ্যাপ ইনস্টল করুন</span></a>
         </div>
     </aside>
 
     <div class="app-container">
         <div class="top-controls">
-            <button class="action-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+            <button class="action-btn" onclick="b4()"><i class="fas fa-bars"></i></button>
             <div class="right-controls">
-                <button class="action-btn" onclick="toggleTheme()" id="themeIcon"><i class="far fa-moon"></i></button>
+                <button class="action-btn" onclick="b3()" id="themeIcon"><i class="far fa-moon"></i></button>
                 <div style="position: relative;">
-                    <button class="lang-btn" onclick="toggleLangMenu()">
+                    <button class="lang-btn" onclick="a4()">
                         <i class="fas fa-globe"></i> <span id="currentLangBtn">BN</span>
                     </button>
                     <div class="lang-dropdown-menu" id="langMenu">
-                        <span onclick="setLanguage('EN')">English</span>
-                        <span onclick="setLanguage('BN')">বাংলা</span>
+                        <span onclick="a3('EN')">English</span>
+                        <span onclick="a3('BN')">বাংলা</span>
                     </div>
                 </div>
             </div>
@@ -316,20 +316,20 @@
                                     <span class="slider"></span>
                                 </label>
                             </div>
-                            <button class="btn-clear" onclick="clearAllText()" id="t-clear"><i class="fas fa-trash-alt"></i> মুছুন</button>
+                            <button class="btn-clear" onclick="b5()" id="t-clear"><i class="fas fa-trash-alt"></i> মুছুন</button>
                         </div>
                     </div>
                     <textarea id="sourceText" placeholder="এখানে ইউনিকোড বা বিজয় টেক্সট লিখুন..."></textarea>
                 </div>
 
                 <div class="action-controls">
-                    <button class="btn-compact btn-primary add-ripple" onclick="handleConvert('bijoy')" id="t-btn-bijoy">
+                    <button class="btn-compact btn-primary add-ripple" onclick="a1('bijoy')" id="t-btn-bijoy">
                         <i class="fas fa-arrow-down"></i> To Bijoy
                     </button>
-                    <button class="btn-compact btn-primary add-ripple" onclick="handleConvert('unicode')" id="t-btn-uni">
+                    <button class="btn-compact btn-primary add-ripple" onclick="a1('unicode')" id="t-btn-uni">
                         <i class="fas fa-arrow-up"></i> To Unicode
                     </button>
-                    <button class="btn-compact btn-secondary add-ripple" onclick="copySmartResult()" id="t-btn-copy">
+                    <button class="btn-compact btn-secondary add-ripple" onclick="b8()" id="t-btn-copy">
                         <i class="far fa-copy"></i> Copy Output
                     </button>
                 </div>
@@ -365,31 +365,31 @@
 
             <div class="section-divider"><span id="t-resources">RESOURCES & FEATURES</span></div>
             
-            <div class="styled-card card-orange add-ripple" id="installAppCard" onclick="triggerInstall()">
+            <div class="styled-card card-orange add-ripple" id="installAppCard" onclick="a2()">
                 <div class="icon-box"><i class="fas fa-download"></i></div>
                 <div class="texts"><h3 id="t-i-title">অ্যাপ ইনস্টল করুন</h3><p id="t-i-desc">হোমস্ক্রিনে অ্যাড করুন</p></div>
                 <div class="arrow"><i class="fas fa-arrow-down"></i></div>
             </div>
 
-            <div class="styled-card card-yellow add-ripple" onclick="openModal('coffeeModal')">
+            <div class="styled-card card-yellow add-ripple" onclick="a8('coffeeModal')">
                 <div class="icon-box"><i class="fas fa-coffee"></i></div>
                 <div class="texts"><h3 id="t-c-title">Buy me a coffee</h3><p id="t-c-desc">Support development</p></div>
                 <div class="arrow"><i class="fas fa-heart" style="color:#E74C3C"></i></div>
             </div>
             
-            <div class="styled-card card-blue add-ripple" onclick="openModal('howItWorksModal')">
+            <div class="styled-card card-blue add-ripple" onclick="a8('howItWorksModal')">
                 <div class="icon-box"><i class="fas fa-cogs"></i></div>
                 <div class="texts"><h3 id="t-h-title">অ্যাপ কীভাবে কাজ করে</h3><p id="t-h-desc">সহজ গাইডলাইন দেখুন</p></div>
                 <div class="arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
 
-            <div class="styled-card card-green add-ripple" onclick="openModal('featuresModal')">
+            <div class="styled-card card-green add-ripple" onclick="a8('featuresModal')">
                 <div class="icon-box"><i class="fas fa-star"></i></div>
                 <div class="texts"><h3 id="t-f-title">অ্যাপের বৈশিষ্ট্যসমূহ</h3><p id="t-f-desc">কী কী সুবিধা পাচ্ছেন দেখুন</p></div>
                 <div class="arrow"><i class="fas fa-chevron-right"></i></div>
             </div>
             
-            <div class="styled-card card-purple add-ripple" onclick="openModal('faqModal')">
+            <div class="styled-card card-purple add-ripple" onclick="a8('faqModal')">
                 <div class="icon-box"><i class="fas fa-question"></i></div>
                 <div class="texts"><h3 id="t-q-title">FAQs</h3><p id="t-q-desc">অফলাইন সাপোর্ট ও অন্যান্য</p></div>
                 <div class="arrow"><i class="fas fa-chevron-right"></i></div>
@@ -407,10 +407,10 @@
                     <div class="liquid-drop" id="liquidDrop"></div>
                 </div>
 
-                <button class="nav-btn active" id="btn-convert" onclick="switchView('convert')">
+                <button class="nav-btn active" id="btn-convert" onclick="a7('convert')">
                     <i class="fas fa-exchange-alt"></i> <span id="b-nav-conv">কনভার্ট</span>
                 </button>
-                <button class="nav-btn" id="btn-dev" onclick="switchView('dev')">
+                <button class="nav-btn" id="btn-dev" onclick="a7('dev')">
                     <i class="fas fa-code"></i> <span id="b-nav-dev">ডেভেলপার</span>
                 </button>
 
@@ -418,13 +418,13 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="coffeeModal" onclick="closeModalOutside(event, 'coffeeModal')">
+    <div class="modal-overlay" id="coffeeModal" onclick="b1(event, 'coffeeModal')">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('coffeeModal')"><i class="fas fa-times"></i></button>
+            <button class="modal-close" onclick="a9('coffeeModal')"><i class="fas fa-times"></i></button>
             <div class="modal-icon" style="background: #FFE8F0; color: #E2136E;"><i class="fas fa-heart"></i></div>
             <h3>Support Development</h3>
             <p>আপনার যদি এই অ্যাপটি ভালো লেগে থাকে, তবে নিচের বিকাশ নাম্বারে সাপোর্ট করতে পারেন:</p>
-            <div class="bkash-box" onclick="copyBkashNumber()">
+            <div class="bkash-box" onclick="b2()">
                 <div style="display: flex; align-items: center; gap: 12px;">
                     <div class="bkash-logo-mimic">
                         <i class="fas fa-paper-plane" style="transform: rotate(-15deg); font-size: 12px;"></i> bKash
@@ -437,9 +437,9 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="howItWorksModal" onclick="closeModalOutside(event, 'howItWorksModal')">
+    <div class="modal-overlay" id="howItWorksModal" onclick="b1(event, 'howItWorksModal')">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('howItWorksModal')"><i class="fas fa-times"></i></button>
+            <button class="modal-close" onclick="a9('howItWorksModal')"><i class="fas fa-times"></i></button>
             <div class="modal-icon" style="background: #F0F4FF; color: #5865F2;"><i class="fas fa-magic"></i></div>
             <h3>কীভাবে কাজ করে?</h3>
             <div class="faq-item">
@@ -457,9 +457,9 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="featuresModal" onclick="closeModalOutside(event, 'featuresModal')">
+    <div class="modal-overlay" id="featuresModal" onclick="b1(event, 'featuresModal')">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('featuresModal')"><i class="fas fa-times"></i></button>
+            <button class="modal-close" onclick="a9('featuresModal')"><i class="fas fa-times"></i></button>
             <div class="modal-icon" style="background: #F0FDF4; color: #22C55E;"><i class="fas fa-star"></i></div>
             <h3>অ্যাপের বৈশিষ্ট্যসমূহ</h3>
             
@@ -473,7 +473,7 @@
             </div>
             <div class="faq-item">
                 <h4><i class="fas fa-shield-alt" style="color:var(--primary);"></i> নিরাপদ ও নির্ভরযোগ্য</h4>
-                <p>আপনার টেক্সট সম্পূর্ণ নিরাপদ। কোন ডাটা সংরক্ষণ করা হয় না।</p>
+                <p>আপনার টেক্সট সম্পূর্ণ নিরাপদ। কোন ডাটা সংরক্ষণ করা হয়বিধা হয় না।</p>
             </div>
             <div class="faq-item">
                 <h4><i class="far fa-check-circle" style="color:var(--primary);"></i> একদম ফ্রি</h4>
@@ -482,9 +482,9 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="faqModal" onclick="closeModalOutside(event, 'faqModal')">
+    <div class="modal-overlay" id="faqModal" onclick="b1(event, 'faqModal')">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('faqModal')"><i class="fas fa-times"></i></button>
+            <button class="modal-close" onclick="a9('faqModal')"><i class="fas fa-times"></i></button>
             <div class="modal-icon" style="background: #FAF5FF; color: #C084FC;"><i class="fas fa-shield-alt"></i></div>
             <h3>সাধারণ জিজ্ঞাসা (FAQs)</h3>
             <div class="faq-item">
@@ -511,7 +511,7 @@
             sideInstall.style.display = 'flex';
         });
 
-        function triggerInstall() {
+        function a2() {
             if (!deferredPrompt) return;
             installCard.style.display = 'none';
             sideInstall.style.display = 'none';
@@ -543,7 +543,7 @@
                 src: "<i class='fas fa-pen' style='color:var(--primary)'></i> Source Text (Input)", auto: "Auto", clear: "<i class='fas fa-trash-alt'></i> Clear",
                 out: "<i class='fas fa-file-alt' style='color:var(--primary)'></i> Converted Text (Output)",
                 btnBjy: "<i class='fas fa-arrow-down'></i> To Bijoy", btnUni: "<i class='fas fa-arrow-up'></i> To Unicode", btnCpy: "<i class='far fa-copy'></i> Copy Output",
-                vis: "Visual Mode", role: "Professional graphic designer, front-end & Android developer based in Barguna, Barishal. Crafting butter smooth UIs.",
+                vis: "Visual Mode", role: "Graphic designer and developer from Barguna, Barishal, blending creativity with code to craft butter-smooth, engaging user experiences.",
                 conn: "CONNECT", res: "RESOURCES & FEATURES",
                 cTitle: "Buy me a coffee", cDesc: "Support development", hTitle: "How it works", hDesc: "See simple guidelines",
                 fTitle: "App Features", fDesc: "See what you get", qTitle: "FAQs", qDesc: "Offline support & more",
@@ -566,7 +566,7 @@
 
         let currentLangStr = 'BN'; // Global Tracker
 
-        function setLanguage(lang) {
+        function a3(lang) {
             currentLangStr = lang;
             document.getElementById('currentLangBtn').innerText = lang;
             document.getElementById('langMenu').classList.remove('show');
@@ -606,11 +606,11 @@
 
             setTimeout(() => {
                 const activeBtn = document.querySelector('.nav-btn.active');
-                if(activeBtn) updateLiquidDrop(activeBtn.id);
+                if(activeBtn) a6(activeBtn.id);
             }, 50);
         }
 
-        function toggleLangMenu() { 
+        function a4() { 
             document.getElementById('langMenu').classList.toggle('show'); 
         }
 
@@ -621,7 +621,7 @@
         }
 
         // --- 3. CUSTOM TOAST NOTIFICATION ---
-        function showToast(msg) {
+        function a5(msg) {
             const toast = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
             toast.classList.add('show');
@@ -649,7 +649,7 @@
         });
 
         // --- 5. Liquid Bottom Nav Logic ---
-        function updateLiquidDrop(targetBtnId) {
+        function a6(targetBtnId) {
             const btn = document.getElementById(targetBtnId);
             const drop = document.getElementById('liquidDrop');
             const navInner = document.getElementById('navInner');
@@ -664,22 +664,22 @@
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => { updateLiquidDrop('btn-convert'); }, 100);
+            setTimeout(() => { a6('btn-convert'); }, 100);
         });
 
         window.addEventListener('resize', () => {
             const activeBtn = document.querySelector('.nav-btn.active');
-            if(activeBtn) updateLiquidDrop(activeBtn.id);
+            if(activeBtn) a6(activeBtn.id);
         });
 
-        function switchView(viewName) {
+        function a7(viewName) {
             document.getElementById('btn-convert').classList.remove('active');
             document.getElementById('btn-dev').classList.remove('active');
             
             const targetBtnId = 'btn-' + viewName;
             document.getElementById(targetBtnId).classList.add('active');
 
-            updateLiquidDrop(targetBtnId);
+            a6(targetBtnId);
 
             const views = document.querySelectorAll('.view-section');
             views.forEach(view => {
@@ -707,18 +707,18 @@
         });
 
         // --- 7. Modal Logic ---
-        function openModal(modalId) { document.getElementById(modalId).classList.add('show'); }
-        function closeModal(modalId) { document.getElementById(modalId).classList.remove('show'); }
-        function closeModalOutside(event, modalId) { if (event.target.id === modalId) closeModal(modalId); }
+        function a8(modalId) { document.getElementById(modalId).classList.add('show'); }
+        function a9(modalId) { document.getElementById(modalId).classList.remove('show'); }
+        function b1(event, modalId) { if (event.target.id === modalId) a9(modalId); }
         
-        function copyBkashNumber() {
+        function b2() {
             navigator.clipboard.writeText("01533327033").then(() => {
-                showToast("বিকাশ নম্বর কপি হয়েছে!");
+                a5("বিকাশ নম্বর কপি হয়েছে!");
             });
         }
 
         // --- 8. Sidebar & Theme ---
-        function toggleTheme() {
+        function b3() {
             const body = document.body;
             const themeIcon = document.querySelector('#themeIcon i');
             if (body.getAttribute('data-theme') === 'dark') {
@@ -729,7 +729,7 @@
                 themeIcon.className = 'fas fa-sun';
             }
         }
-        function toggleSidebar() {
+        function b4() {
             document.getElementById('sidebar').classList.toggle('open');
             document.getElementById('overlay').classList.toggle('show');
         }
@@ -742,11 +742,11 @@
         // Auto Convert Trigger
         sourceTextInput.addEventListener('input', function() {
             if (autoToggle.checked) {
-                handleConvert(currentConvertMode);
+                a1(currentConvertMode);
             }
         });
 
-        function clearAllText() {
+        function b5() {
             sourceTextInput.value = "";
             document.getElementById('visualOutput').value = "";
             document.getElementById('realCopyData').value = "";
@@ -754,7 +754,7 @@
         }
 
         // UNICODE -> BIJOY ENGINE
-        function getRealBijoyConvertedText(srcString) {
+        function b6_bijoy(srcString) {
             let result = srcString;
             const replaceRules = [
                 [/ক্স/g, "·"], [/ক্ট/g, "±"], [/ক্ত/g, "³"], [/ক্ব/g, "ক¡"], [/স্ক্র/g, "¯Œ"],
@@ -796,7 +796,7 @@
         }
 
         // BIJOY -> UNICODE ENGINE
-        function getRealUnicodeConvertedText(srcString) {
+        function b7_uni(srcString) {
             if (!srcString) return "";
             let text = srcString;
             
@@ -845,7 +845,7 @@
             return finalOutput;
         }
 
-        function handleConvert(type) {
+        function a1(type) {
             currentConvertMode = type;
             const input = sourceTextInput.value;
             
@@ -860,13 +860,13 @@
             const badge = document.getElementById('previewBadge');
 
             if (type === 'bijoy') {
-                const actualBijoyCode = getRealBijoyConvertedText(input);
+                const actualBijoyCode = b6_bijoy(input);
                 visualOut.value = input; 
                 realOut.value = actualBijoyCode; 
                 badge.style.display = 'block';
                 badge.innerHTML = '<i class="fas fa-eye"></i> <span id="t-vis">' + dictionary[currentLangStr].vis + '</span>';
             } else {
-                const actualUnicodeCode = getRealUnicodeConvertedText(input);
+                const actualUnicodeCode = b7_uni(input);
                 visualOut.value = actualUnicodeCode; 
                 realOut.value = actualUnicodeCode;
                 badge.style.display = 'none';
@@ -874,14 +874,14 @@
         }
 
         // --- 10. Smart Select & Copy ---
-        function copySmartResult() {
+        function b8() {
             const copyData = document.getElementById('realCopyData').value;
             if(copyData.trim() === "") { 
-                showToast("কপি করার মতো কিছু নেই!"); 
+                a5("কপি করার মতো কিছু নেই!"); 
                 return; 
             }
             navigator.clipboard.writeText(copyData).then(() => {
-                showToast(dictionary[currentLangStr].toastCopy);
+                a5(dictionary[currentLangStr].toastCopy);
             });
         }
 
@@ -895,8 +895,29 @@
             } else if (window.clipboardData) {
                 window.clipboardData.setData('Text', realData);
             }
-            showToast(dictionary[currentLangStr].toastCopy);
+            a5(dictionary[currentLangStr].toastCopy);
         });
+
+        // --- 11. SECURITY / ANTI-INSPECT BLOCK ---
+        
+        // Disable Right Click
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // Disable Keyboard Shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || e.keyCode === 123) { e.preventDefault(); }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) { e.preventDefault(); }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) { e.preventDefault(); }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) { e.preventDefault(); }
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); }
+        });
+
+        // Debugger Trap
+        setInterval(function() {
+            (function() { return false; }['constructor']('debugger')());
+        }, 100);
 
     </script>
 </body>
